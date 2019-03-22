@@ -63,7 +63,7 @@ import java.util.Locale;
  */
 public class DomainValidator implements Serializable {
 
-    private static final int MAX_DOMAIN_LENGTH = 253;
+    static final int MAX_DOMAIN_LENGTH = 253;
 
     private static final String[] EMPTY_STRING_ARRAY = new String[0];
 
@@ -84,7 +84,7 @@ public class DomainValidator implements Serializable {
     // the RFC does not. This is because the regex is used to detect if a TLD is present.
     // If the match fails, input is checked against DOMAIN_LABEL_REGEX (hostnameRegex)
     // RFC1123 sec 2.1 allows hostnames to start with a digit
-    private static final String DOMAIN_NAME_REGEX =
+    static final String DOMAIN_NAME_REGEX =
             "^(?:" + DOMAIN_LABEL_REGEX + "\\.)+" + "(" + TOP_LABEL_REGEX + ")\\.?$";
 
     private final boolean allowLocal;
@@ -254,7 +254,7 @@ public class DomainValidator implements Serializable {
         return arrayContains(LOCAL_TLDS, key);
     }
 
-    private String chompLeadingDot(String str) {
+    static String chompLeadingDot(String str) {
         if (str.startsWith(".")) {
             return str.substring(1);
         }
@@ -1863,7 +1863,7 @@ public class DomainValidator implements Serializable {
      * This field is used to detect whether the getInstance has been called.
      * After this, the method updateTLDOverride is not allowed to be called.
      * This field does not need to be volatile since it is only accessed from
-     * synchronized methods. 
+     * synchronized methods.
      */
     private static boolean inUse = false;
 
@@ -2017,7 +2017,7 @@ public class DomainValidator implements Serializable {
     /**
      * Converts potentially Unicode input to punycode.
      * If conversion fails, returns the original input.
-     * 
+     *
      * @param input the string to convert, not null
      * @return converted input, or original input if conversion fails
      */

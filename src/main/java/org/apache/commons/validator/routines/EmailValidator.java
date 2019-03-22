@@ -46,8 +46,8 @@ public class EmailValidator implements Serializable {
     private static final String IP_DOMAIN_REGEX = "^\\[(.*)\\]$";
     private static final String USER_REGEX = "^\\s*" + WORD + "(\\." + WORD + ")*$";
 
-    private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
-    private static final Pattern IP_DOMAIN_PATTERN = Pattern.compile(IP_DOMAIN_REGEX);
+    static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
+    static final Pattern IP_DOMAIN_PATTERN = Pattern.compile(IP_DOMAIN_REGEX);
     private static final Pattern USER_PATTERN = Pattern.compile(USER_REGEX);
 
     private static final int MAX_USERNAME_LEN = 64;
@@ -211,12 +211,12 @@ public class EmailValidator implements Serializable {
      * @param user being validated
      * @return true if the user name is valid.
      */
-    protected boolean isValidUser(String user) {
-        
+    static boolean isValidUser(String user) {
+
         if (user == null || user.length() > MAX_USERNAME_LEN) {
             return false;
         }
-        
+
         return USER_PATTERN.matcher(user).matches();
     }
 
